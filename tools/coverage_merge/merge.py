@@ -514,10 +514,14 @@ if __name__ == "__main__":
                     inpt_xml = input_files.get(block=True,timeout=1)
                     merger.process_xml(inpt_xml)
                     log("got: %s" % (inpt_xml), proc_id)
+                except Queue.Empty:
+                    log("ERROR: queue empty")
+                    pass
+                except:
+                    log("ERROR: misc exception")
+                finally:
                     merge_count += 1
                     output_merge_notif_queue.put(1)
-                except Queue.Empty:
-                    pass
             deep_debug("Merge job complete. writing merged db", proc_id)
             deep_debug("FCOV merge count total(%d)" % merge_count, proc_id)
             if merge_count > 0:
