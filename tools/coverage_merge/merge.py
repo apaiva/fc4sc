@@ -480,10 +480,15 @@ if __name__ == "__main__":
             from datetime import datetime
             import time
             import watchdog.events
+            print("XXX: got wde")
             import watchdog.observers
+            print("XXX: got wdo")
             import multiprocessing
-            import Queue
+            print("XXX: got multip")
+            import queue as Queue
+            print("XXX: got q")
             import threading
+            print("XXX: thread")
             import os.path
             if(args.watchdog_supported):
                 exit(0)
@@ -516,7 +521,8 @@ if __name__ == "__main__":
                     log("got: %s" % (inpt_xml), proc_id)
                     merge_count += 1
                     output_merge_notif_queue.put(1)
-                except Queue.Empty:
+#               except Queue.Empty:
+                except:
                     pass
             deep_debug("Merge job complete. writing merged db", proc_id)
             deep_debug("FCOV merge count total(%d)" % merge_count, proc_id)
